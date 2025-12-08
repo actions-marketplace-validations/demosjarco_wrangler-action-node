@@ -39,7 +39,7 @@ jobs:
         run: npm install -D @vercel/ncc
       - name: Compile action
         run: npx ncc build src/index.ts --v8-cache --minify --target es2023 --out compiled
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v5
         with:
           name: compiled
           path: compiled
