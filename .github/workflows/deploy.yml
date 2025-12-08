@@ -1,3 +1,5 @@
+name: Compile, Test, and Publish
+
 on:
   push:
     branches:
@@ -36,7 +38,7 @@ jobs:
       - name: Install action compiler
         run: npm install -D @vercel/ncc
       - name: Compile action
-        run: npx ncc build src/index.ts -o compiled
+        run: npx ncc build src/index.ts --v8-cache --minify --target es2023 --out compiled
       - uses: actions/upload-artifact@v3
         with:
           name: compiled
@@ -65,6 +67,9 @@ jobs:
           cache-dependency-path: 'test/package-lock.json'
       - run: npm ci
         working-directory: ./test
+      - name: Delete old compiled action
+        run: rm -rv compiled
+        shell: bash
       - uses: actions/download-artifact@v3
         with:
           name: compiled
@@ -108,6 +113,9 @@ jobs:
           cache-dependency-path: 'test/package-lock.json'
       - run: npm ci
         working-directory: ./test
+      - name: Delete old compiled action
+        run: rm -rv compiled
+        shell: bash
       - uses: actions/download-artifact@v3
         with:
           name: compiled
@@ -143,6 +151,9 @@ jobs:
           cache-dependency-path: 'test/package-lock.json'
       - run: npm ci
         working-directory: ./test
+      - name: Delete old compiled action
+        run: rm -rv compiled
+        shell: bash
       - uses: actions/download-artifact@v3
         with:
           name: compiled
@@ -180,6 +191,9 @@ jobs:
           cache-dependency-path: 'test/package-lock.json'
       - run: npm ci
         working-directory: ./test
+      - name: Delete old compiled action
+        run: rm -rv compiled
+        shell: bash
       - uses: actions/download-artifact@v3
         with:
           name: compiled
@@ -215,6 +229,9 @@ jobs:
           cache-dependency-path: 'test/package-lock.json'
       - run: npm ci
         working-directory: ./test
+      - name: Delete old compiled action
+        run: rm -rv compiled
+        shell: bash
       - uses: actions/download-artifact@v3
         with:
           name: compiled
@@ -249,6 +266,9 @@ jobs:
           disable-sudo: true
           egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
       - uses: actions/checkout@v3
+      - name: Delete old compiled action
+        run: rm -rv compiled
+        shell: bash
       - uses: actions/download-artifact@v3
         with:
           name: compiled
@@ -258,8 +278,8 @@ jobs:
           git config --local user.name "DemosJarco"
           git config --local user.email "1209494+demosjarco@users.noreply.github.com"
       - run: git add compiled/
-      - run: git diff --staged --quiet || git commit -m '[ci skip] $PREVIOUS_GIT_MESSAGE'
+      - run: git commit -m "[ci skip] $PREVIOUS_GIT_MESSAGE"
         shell: bash
         env:
-          PREVIOUS_GIT_MESSAGE: ${{github.event.head_commit.message}}
+          PREVIOUS_GIT_MESSAGE: ${{ github.event.head_commit.message }}
       - run: git push
