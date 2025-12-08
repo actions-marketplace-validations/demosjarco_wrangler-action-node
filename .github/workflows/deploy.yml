@@ -70,7 +70,7 @@ jobs:
       - name: Delete old compiled action
         run: rm -rv compiled
         shell: bash
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v6
         with:
           name: compiled
           path: compiled
@@ -116,7 +116,7 @@ jobs:
       - name: Delete old compiled action
         run: rm -rv compiled
         shell: bash
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v6
         with:
           name: compiled
           path: compiled
@@ -154,7 +154,7 @@ jobs:
       - name: Delete old compiled action
         run: rm -rv compiled
         shell: bash
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v6
         with:
           name: compiled
           path: compiled
@@ -194,7 +194,7 @@ jobs:
       - name: Delete old compiled action
         run: rm -rv compiled
         shell: bash
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v6
         with:
           name: compiled
           path: compiled
@@ -232,7 +232,7 @@ jobs:
       - name: Delete old compiled action
         run: rm -rv compiled
         shell: bash
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v6
         with:
           name: compiled
           path: compiled
@@ -269,7 +269,7 @@ jobs:
       - name: Delete old compiled action
         run: rm -rv compiled
         shell: bash
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v6
         with:
           name: compiled
           path: compiled
